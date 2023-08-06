@@ -419,16 +419,23 @@ int CNfcConfig::getconfiguration_id (char * config_file)
                 strlcpy(config_file, config_name_qrd_SN100_38_4MHZ, MAX_DATA_CONFIG_PATH_LEN);
             }
             break;
-        case TARGET_SM_CAMANO:
-            // SN220
-            config_id = GENERIC_19_2_TYPE_SN220;
-            strlcpy(config_file, config_name_SN220_19_2MHZ, MAX_DATA_CONFIG_PATH_LEN);
+	case TARGET_SM_CAMANO:
+            if (!strcmp(nq_chip_info.nq_chipid, SN220_CHIP_ID)) {
+                // SN220
+                config_id = GENERIC_19_2_TYPE_SN220;
+                strlcpy(config_file, config_name_SN220_19_2MHZ, MAX_DATA_CONFIG_PATH_LEN);
+            } else {
+                // SN110
+                config_id = GENERIC_19_2_TYPE_SN1xx;
+                strlcpy(config_file, config_name_qrd_SN100, MAX_DATA_CONFIG_PATH_LEN);
+            }
             break;
         case TARGET_SM6125_QCM:
         case TARGET_SM6125_QCS:
             //SN110
             config_id = GENERIC_19_2_TYPE_SN1xx;
             strlcpy(config_file, config_name_qrd_SN100, MAX_DATA_CONFIG_PATH_LEN);
+            break;
         default:
             config_id = QRD_TYPE_DEFAULT;
             strlcpy(config_file, config_name_qrd, MAX_DATA_CONFIG_PATH_LEN);
@@ -459,16 +466,23 @@ int CNfcConfig::getconfiguration_id (char * config_file)
                 strlcpy(config_file, config_name_mtp_SN100_38_4MHZ, MAX_DATA_CONFIG_PATH_LEN);
             }
             break;
-        case TARGET_SM_CAMANO:
-            // SN220
-            config_id = GENERIC_19_2_TYPE_SN220;
-            strlcpy(config_file, config_name_SN220_19_2MHZ, MAX_DATA_CONFIG_PATH_LEN);
-            break;
+	case TARGET_SM_CAMANO:
+            if (!strcmp(nq_chip_info.nq_chipid, SN220_CHIP_ID)) {
+                 // SN220
+                 config_id = GENERIC_19_2_TYPE_SN220;
+                 strlcpy(config_file, config_name_SN220_19_2MHZ, MAX_DATA_CONFIG_PATH_LEN);
+            } else {
+                // SN110
+                config_id = GENERIC_19_2_TYPE_SN1xx;
+                strlcpy(config_file, config_name_mtp_SN100, MAX_DATA_CONFIG_PATH_LEN);
+            }
+	    break;
         case TARGET_SM6125_QCM:
         case TARGET_SM6125_QCS:
             //SN110
             config_id = GENERIC_19_2_TYPE_SN1xx;
             strlcpy(config_file, config_name_mtp_SN100, MAX_DATA_CONFIG_PATH_LEN);
+            break;
         default:
             config_id = MTP_TYPE_DEFAULT;
             strlcpy(config_file, config_name_mtp, MAX_DATA_CONFIG_PATH_LEN);
